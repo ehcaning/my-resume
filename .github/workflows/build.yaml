@@ -1,0 +1,19 @@
+name: Compile LaTeX
+on: [ push ]
+
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    container: kjarosh/latex:2025.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build using latexmk
+        run: xelatex -jobname=resume -output-directory=out resume.tex
+
+      - name: Upload document
+        uses: actions/upload-artifact@v4
+        with:
+          name: Resume
+          path: out/resume.pdf
