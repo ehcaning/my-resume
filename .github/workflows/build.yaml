@@ -3,6 +3,7 @@ on: [ push ]
 
 jobs:
   container:
+    name: Build LaTeX Document
     runs-on: ubuntu-latest
     container: kjarosh/latex:2025.1
     steps:
@@ -20,3 +21,12 @@ jobs:
         with:
           name: Resume
           path: out/resume.pdf
+
+      - name: Set DATE variable
+        run: echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+
+      - uses: deka0106/upload-to-dropbox@v2
+        with:
+          dropbox_access_token: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+          src: out/resume.pdf
+          dest: /Resume/Ehsan_Seyedi_Resume_${{ env.DATE }}.pdf
