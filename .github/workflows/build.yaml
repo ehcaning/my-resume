@@ -9,6 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create output directory
+        run: mkdir -p out
+
       - name: Build using latexmk
         run: xelatex -jobname=resume -output-directory=out resume.tex
 
