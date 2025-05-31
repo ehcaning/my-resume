@@ -2,7 +2,7 @@ name: Compile LaTeX
 on: [ push ]
 
 jobs:
-  container:
+  build:
     name: Build LaTeX Document
     runs-on: ubuntu-latest
     container: kjarosh/latex:2025.1
@@ -21,6 +21,17 @@ jobs:
         with:
           name: Resume
           path: out/resume.pdf
+
+  upload_to_dropbox:
+    name: Upload to Dropbox
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Resume
+          path: out
 
       - name: Set DATE variable
         run: echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
