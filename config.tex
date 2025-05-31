@@ -166,6 +166,10 @@
 }
 
 % new command for external links:
+\newcommand{\startWorkingYear}{2014} % Start working year
+\newcommand{\yearsOfExp}{\the\numexpr\year - \startWorkingYear\relax}
+
+
 \newcommand{\companyentry}[3]{%
   \hrefWithArrow{#2}{%
     \raisebox{-0.15\height}{\includegraphics[height=0.4cm]{#3}}%
