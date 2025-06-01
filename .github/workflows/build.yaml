@@ -1,5 +1,10 @@
 name: Build LaTeX Document and push to Dropbox
-on: [ push ]
+on:
+  push:
+    paths-ignore:
+      - '**/*.md'
+      - '.gitignore'
+      - 'Makefile'
 
 jobs:
   build:
